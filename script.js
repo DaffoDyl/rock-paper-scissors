@@ -1,7 +1,8 @@
+//Players response
 let playerPlay = () => {
     return prompt("Rock, paper, or scissors?").toLowerCase();
 }
-
+//Computers response
 let computerPlay = () => {
     let selection = Math.floor(Math.random() * 3);
 
@@ -14,7 +15,7 @@ let computerPlay = () => {
             return "scissors";
     }
 }
-
+//Play one round based on responses
 let play = (player, computer) => {
     let results;
 
@@ -31,7 +32,7 @@ let play = (player, computer) => {
 
     return results;
 }
-
+//Play game, best of five
 let game = () => {
     let playerScore = 0;
     let computerScore = 0;
@@ -63,7 +64,7 @@ let game = () => {
 
         if(playerScore == 3 || computerScore == 3) noWinner = false;
     }
-      
+
     if(playerScore > computerScore) {
         console.log(`You won best of five! Final score was ${playerScore} to ${computerScore}.`);
     }
