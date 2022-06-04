@@ -1,9 +1,14 @@
+const scoreMessage = document.getElementById('scoreMessage');
+const playerSign = document.getElementById('playerSign');
+const playerScoreUI = document.getElementById('playerScore');
+const computerSign = document.getElementById('computerSign');
+const computerScoreUI = document.getElementById('computerScore');
 const rockBtn = document.getElementById("rock");
 const paperBtn = document.getElementById("paper");
 const scissorsBtn = document.getElementById("scissors");
+
 let playerScore = 0;
 let computerScore = 0;
-let ties = 0;
 
 let randomSelection = () => {
     let selection = Math.floor(Math.random() * 3);
@@ -19,7 +24,12 @@ let randomSelection = () => {
 }
 
 let updateScore = (winner) => {
-    (winner == "player") ? playerScore++ : (winner == "computer") ? computerScore++ : ties++;
+    if(winner == "player") {
+        playerScore++;
+    }
+    else if(winner == "computer") {
+        computerScore++;
+    } 
 }
 
 let playRound = (player, computer) => {
@@ -36,30 +46,70 @@ let playRound = (player, computer) => {
             (computer == "scissors") ? winner = "tie" : (computer == "rock") ? winner = "computer" : winner = "player";
     }
     updateScore(winner);
+
+    return winner;
 }
 
-let clearBoard = () => {
+let updateBoard = (player, computer, winner) => {
+    switch(winner) {
+        case "player":
+            scoreMessage.textContent = `You won, ${player} beats ${computer}!`;
+            break;
+        case "computer":
+            scoreMessage.textContent = `You lost, ${computer} beats ${player}!`;
+            break;
+        case "tie":
+            scoreMessage.textContent = `You tied, ${player} ties ${computer}!`;
+    }
+    switch(player) {
+        case "rock":
+            playerSign.textContent = "🪨";
+            break;
+        case "paper":
+            playerSign.textContent = "📃";
+            break;
+        case "scissors":
+            playerSign.textContent = "✂️";
+    }
+    switch(computer) {
+        case "rock":
+            computerSign.textContent = "🪨";
+            break;
+        case "paper":
+            computerSign.textContent = "📃";
+            break;
+        case "scissors":
+            computerSign.textContent = "✂️";
+    }
+    playerScoreUI.textContent = `Player: ${playerScore}`;
+    computerScoreUI.textContent = `Computer ${computerScore}`
+}
+
+let resetBoard = () => {
     playerScore = 0;
     computerScore = 0;
-    ties = 0;
+    scoreMessage.textContent = `Score 5 points to win`;
+    playerSign.textContent = "❔";
+    computerSign.textContent = "❔";
+    playerScoreUI.textContent = `Player: ${playerScore}`;
+    computerScoreUI.textContent = `Computer ${computerScore}`
 }
 
-let checkWinner = () => {
+let checkGameOver = () => {
     let winner = (playerScore == 5) ?  "player" : (computerScore == 5) ? "computer" : "none";
     if(winner == "player") {
-        console.log("Player win");
-        clearBoard();
+        resetBoard();
     }
     else if(winner == "computer") {
-        console.log("Computer win")
-        clearBoard();
+        resetBoard();
     }
 }
 
 let handleClick = (playerChoice) => {
     let computerChoice = randomSelection()
-    playRound(playerChoice, computerChoice);
-    checkWinner(); 
+    let winner = playRound(playerChoice, computerChoice);
+    updateBoard(playerChoice, computerChoice, winner);
+    checkGameOver(); 
 }
 
 rockBtn.addEventListener('click', () => handleClick("rock"));
