@@ -1,9 +1,11 @@
-//Players response
-let playerPlay = () => {
-    return prompt("Rock, paper, or scissors?").toLowerCase();
-}
-//Computers response
-let computerPlay = () => {
+const rockBtn = document.getElementById("rock");
+const paperBtn = document.getElementById("paper");
+const scissorsBtn = document.getElementById("scissors");
+let playerScore = 0;
+let computerScore = 0;
+let ties = 0;
+
+let randomSelection = () => {
     let selection = Math.floor(Math.random() * 3);
 
     switch(selection) {
@@ -15,8 +17,7 @@ let computerPlay = () => {
             return "scissors";
     }
 }
-//Play one round based on responses
-let play = (player, computer) => {
+let playRound = (player, computer) => {
     let results;
 
     switch(player) {
@@ -32,45 +33,36 @@ let play = (player, computer) => {
 
     return results;
 }
-//Play game, best of five
-let game = () => {
-    let playerScore = 0;
-    let computerScore = 0;
-    let noWinner = true;
 
-    console.log("Rock, paper, scissors! The game will continue until best of 5.");
+let updateScore = (results) => {
+    (results == "win") ? playerScore++ : (results == "loss") ? computerScore++ : ties++;
+}
 
-    while(noWinner) {
-        let player = playerPlay();
-        let computer = computerPlay()
-        let results = play(player, computer);
-        player = player[0].toUpperCase() + player.slice(1);
+let whoWins = () => {
+    return (playerScore == 5) ?  "player" : (computerScore == 5) ? "computer" : "none";
+}
 
-        switch(results) {
-            case "tie":
-                console.log(`You tied! ${player} ties ${computer}.`);
-                break
-            case "loss":
-                console.log(`You lost! ${player} losses to ${computer}.`);
-                computerScore++
-                break;
-            case "win":
-                console.log(`You won! ${player} beats ${computer}.`);
-                playerScore++
-                break;
-            default:
-                console.log(`Invalid input: ${player} not recognized. No winner.`);
-        }
+let clearBoard = () => {
+    playerScore = 0;
+    computerScore = 0;
+    ties = 0;
+}
 
-        if(playerScore == 3 || computerScore == 3) noWinner = false;
+let handleClick = (playerChoice) => {
+    let computerChoice = randomSelection()
+    let results = playRound(playerChoice, computerChoice);
+    updateScore(results);
+    let winner = whoWins();
+    if(winner == "player") {
+        console.log("Player win");
+        clearBoard();
     }
-
-    if(playerScore > computerScore) {
-        console.log(`You won best of five! Final score was ${playerScore} to ${computerScore}.`);
-    }
-    else {
-        console.log(`You lost best of five. Final score was ${playerScore} to ${computerScore}.`);
+    else if(winner == "computer") {
+        console.log("Computer win")
+        clearBoard();
     }
 }
 
-game();
+rockBtn.addEventListener('click', () => handleClick("rock"));
+paperBtn.addEventListener('click', () => handleClick("paper"));
+scissorsBtn.addEventListener('click', () => handleClick("scissors"));
