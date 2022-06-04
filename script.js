@@ -6,6 +6,7 @@ const computerScoreUI = document.getElementById('computerScore');
 const rockBtn = document.getElementById("rock");
 const paperBtn = document.getElementById("paper");
 const scissorsBtn = document.getElementById("scissors");
+const resetBtn = document.getElementById("reset");
 
 let playerScore = 0;
 let computerScore = 0;
@@ -59,7 +60,7 @@ let updateBoard = (player, computer, winner) => {
             scoreMessage.textContent = `You lost, ${computer} beats ${player}!`;
             break;
         case "tie":
-            scoreMessage.textContent = `You tied, ${player} ties ${computer}!`;
+            scoreMessage.textContent = `It's a tie, ${player} ties ${computer}!`;
     }
     switch(player) {
         case "rock":
@@ -85,23 +86,21 @@ let updateBoard = (player, computer, winner) => {
     computerScoreUI.textContent = `Computer ${computerScore}`
 }
 
-let resetBoard = () => {
-    playerScore = 0;
-    computerScore = 0;
-    scoreMessage.textContent = `Score 5 points to win`;
-    playerSign.textContent = "❔";
-    computerSign.textContent = "❔";
-    playerScoreUI.textContent = `Player: ${playerScore}`;
-    computerScoreUI.textContent = `Computer ${computerScore}`
-}
-
 let checkGameOver = () => {
     let winner = (playerScore == 5) ?  "player" : (computerScore == 5) ? "computer" : "none";
     if(winner == "player") {
-        resetBoard();
+        scoreMessage.textContent = "You won! You beat the advanced AI and saved humanity!";
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+        resetBtn.textContent = "Play again? 🏆"
     }
     else if(winner == "computer") {
-        resetBoard();
+        scoreMessage.textContent = "You lost... The advanced AI beat you and destroyed humanity!";
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+        resetBtn.textContent = "Try again? 🪦"
     }
 }
 
@@ -112,6 +111,21 @@ let handleClick = (playerChoice) => {
     checkGameOver(); 
 }
 
+let resetBoard = () => {
+    playerScore = 0;
+    computerScore = 0;
+    scoreMessage.textContent = "Score five points to win";
+    playerSign.textContent = "❔";
+    computerSign.textContent = "❔";
+    playerScoreUI.textContent = `Player: ${playerScore}`;
+    computerScoreUI.textContent = `Computer ${computerScore}`
+    rockBtn.disabled = false;
+    paperBtn.disabled = false;
+    scissorsBtn.disabled = false;
+    resetBtn.textContent = "Reset Game 🔁"
+}
+
 rockBtn.addEventListener('click', () => handleClick("rock"));
 paperBtn.addEventListener('click', () => handleClick("paper"));
 scissorsBtn.addEventListener('click', () => handleClick("scissors"));
+resetBtn.addEventListener('click', () => resetBoard());
