@@ -1,3 +1,3 @@
 # rock-paper-scissors
 
-Simple rock, paper, scissors game. Currently the game is run in the developers tools under the console.
+Simple rock, paper, scissors game. Game is run in browser with a simple UI.

@@ -4,9 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>
-    <script src="script.js"></script>
+    <header class="header">
+        <h1 class="title">Rock, Paper, Scissors</h1>
+    </header>
+    <main class="main">
+        <div class="scoreboard">
+            <h2 class="score-message" id="scoreMessage">Score five points to win the game</h2>
+            <div class="scores-container">
+                <div class="score-box">
+                    <div class="sign" id="playerSign">❔</div>
+                    <p class="score" id="playerScore">Player: 0</p>
+                </div>
+                <div class="score-box">
+                    <div class="sign" id="computerSign">❔</div>
+                    <p class="score" id="computerScore">Computer: 0</p>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="rock">
+                <div class="sign">🪨</div>
+            </button>
+            <button id="paper">
+                <div class="sign">📃</div>
+            </button>
+            <button id="scissors">
+                <div class="sign">✂️</div>
+            </button>
+        </div>
+        <div class="buttons">
+            <button id="reset">
+                <div class="sign">🔁</div>
+            </button>
+        </div>
+    </main>
+    <footer class="footer">
+        <a href="https://github.com/DaffoDyl" target="_blank">Copyright © 2022 Daffodyl</a>
+    </footer>
 </body>
 </html>
