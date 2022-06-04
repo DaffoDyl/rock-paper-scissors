@@ -17,29 +17,37 @@ let randomSelection = () => {
             return "scissors";
     }
 }
+
+let updateScore = (winner) => {
+    (winner == "player") ? playerScore++ : (winner == "computer") ? computerScore++ : ties++;
+}
+
 let playRound = (player, computer) => {
-    let results;
+    let winner;
 
     switch(player) {
         case "rock":
-            (computer == "rock") ? results = "tie" : (computer == "paper") ? results = "loss" : results = "win";
+            (computer == "rock") ? winner = "tie" : (computer == "paper") ? winner = "computer" : winner = "player";
             break;
         case "paper":
-            (computer == "paper") ? results = "tie" : (computer == "scissors") ? results = "loss" : results = "win";
+            (computer == "paper") ? winner = "tie" : (computer == "scissors") ? winner = "computer" : winner = "player";
             break;
         case "scissors":
-            (computer == "scissors") ? results = "tie" : (computer == "rock") ? results = "loss" : results = "win";
+            (computer == "scissors") ? winner = "tie" : (computer == "rock") ? winner = "computer" : winner = "player";
     }
-
-    return results;
+    updateScore(winner);
 }
 
-let updateScore = (results) => {
-    (results == "win") ? playerScore++ : (results == "loss") ? computerScore++ : ties++;
-}
-
-let whoWins = () => {
-    return (playerScore == 5) ?  "player" : (computerScore == 5) ? "computer" : "none";
+let checkWinner = () => {
+    let winner = (playerScore == 5) ?  "player" : (computerScore == 5) ? "computer" : "none";
+    if(winner == "player") {
+        console.log("Player win");
+        clearBoard();
+    }
+    else if(winner == "computer") {
+        console.log("Computer win")
+        clearBoard();
+    }
 }
 
 let clearBoard = () => {
@@ -50,17 +58,8 @@ let clearBoard = () => {
 
 let handleClick = (playerChoice) => {
     let computerChoice = randomSelection()
-    let results = playRound(playerChoice, computerChoice);
-    updateScore(results);
-    let winner = whoWins();
-    if(winner == "player") {
-        console.log("Player win");
-        clearBoard();
-    }
-    else if(winner == "computer") {
-        console.log("Computer win")
-        clearBoard();
-    }
+    playRound(playerChoice, computerChoice);
+    checkWinner(); 
 }
 
 rockBtn.addEventListener('click', () => handleClick("rock"));
