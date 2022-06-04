@@ -8,10 +8,32 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div>
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
-    </div>
+    <main class="main">
+        <div class="scoreboard">
+            <h2 class="score-info" id="scoreInfo">Rock, paper, or scissors?</h2>
+            <h3 class="score-message" id="scoreMessage">First to score 5 points wins the game</h3>
+            <div class="scores-container">
+                <div class="score-box">
+                    <div class="sign" id="playerSign">❔</div>
+                    <p class="score" id="playerScore">Player: 0</p>
+                </div>
+                <div class="score-box">
+                    <div class="sign" id="computerSign">❔</div>
+                    <p class="score" id="computerScore">Computer: 0</p>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="rockBtn">
+                <div class="sign">Rock ✊</div>
+            </button>
+            <button id="paperBtn">
+                <div class="sign">Paper ✋</div>
+            </button>
+            <button id="scissorsBtn">
+                <div class="sign">Scissors ✌</div>
+            </button>
+        </div>
+    </main>
 </body>
 </html>

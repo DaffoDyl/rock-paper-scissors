@@ -38,6 +38,12 @@ let playRound = (player, computer) => {
     updateScore(winner);
 }
 
+let clearBoard = () => {
+    playerScore = 0;
+    computerScore = 0;
+    ties = 0;
+}
+
 let checkWinner = () => {
     let winner = (playerScore == 5) ?  "player" : (computerScore == 5) ? "computer" : "none";
     if(winner == "player") {
@@ -48,12 +54,6 @@ let checkWinner = () => {
         console.log("Computer win")
         clearBoard();
     }
-}
-
-let clearBoard = () => {
-    playerScore = 0;
-    computerScore = 0;
-    ties = 0;
 }
 
 let handleClick = (playerChoice) => {
