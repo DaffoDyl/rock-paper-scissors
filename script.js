@@ -93,14 +93,14 @@ let checkGameOver = () => {
         rockBtn.disabled = true;
         paperBtn.disabled = true;
         scissorsBtn.disabled = true;
-        resetBtn.textContent = "Play again? 🏆"
+        resetBtn.firstElementChild.textContent = "🏆"
     }
     else if(winner == "computer") {
         scoreMessage.textContent = "You lost... The advanced AI beat you and destroyed humanity!";
         rockBtn.disabled = true;
         paperBtn.disabled = true;
         scissorsBtn.disabled = true;
-        resetBtn.textContent = "Try again? 🪦"
+        resetBtn.firstElementChild.textContent = "🪦"
     }
 }
 
@@ -122,7 +122,7 @@ let resetBoard = () => {
     rockBtn.disabled = false;
     paperBtn.disabled = false;
     scissorsBtn.disabled = false;
-    resetBtn.textContent = "Reset Game 🔁"
+    resetBtn.firstElementChild.textContent = "🔁"
 }
 
 rockBtn.addEventListener('click', () => handleClick("rock"));
